@@ -1,5 +1,8 @@
 # iPerf Discovery Utility
 
+![Python](https://img.shields.io/badge/Python-3.6+-blue?logo=python&logoColor=white) ![License](https://img.shields.io/badge/License-MIT-green) ![Status](https://img.shields.io/badge/Status-Active-success)
+
+
 ## Overview
 
 The iPerf Discovery Utility is a Python 3 script designed to locate NetAlly Test Accessories running iPerf3 servers on a specified IPv4 network. It scans for devices listening on TCP port 2359, queries them with a specific message, and logs the results to a file. The script is optimized for embedded systems, using only Python 3 standard library modules.
