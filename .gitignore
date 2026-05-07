@@ -1,21 +1,74 @@
+# ╔═══════════════════════════════════════════════════════════════════════════╗
+# ║ Test Accessory Finder (iPerf Discovery) - .gitignore                      ║
+# ╠═══════════════════════════════════════════════════════════════════════════╣
+# ║ Network discovery tool for iPerf test accessories                         ║
+# ║ Stack: Python 3.x, network scanning                                       ║
+# ╚═══════════════════════════════════════════════════════════════════════════╝
 
-.DS_Store
+# ─── Python Core ─────────────────────────────────────────────────────────────
 __pycache__/
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+
+# ─── Virtual Environments ────────────────────────────────────────────────────
 .venv/
-*.egg-info/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.Python
+
+# ─── Distribution & Packaging ────────────────────────────────────────────────
 build/
 dist/
-
-# Tooling defaults
-*.log
-.env
-.env.*
-venv/
-.coverage
-coverage.xml
+*.egg-info/
 .eggs/
+*.egg
+MANIFEST
+
+# ─── Testing & Coverage ──────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
 .tox/
 .nox/
+.hypothesis/
+
+# ─── Type Checking & Linting ─────────────────────────────────────────────────
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+
+# ─── Environment & Secrets ───────────────────────────────────────────────────
+.env
+.env.*
+.env.local
+
+# ─── Discovery Results ───────────────────────────────────────────────────────
+# Discovered device lists
+discovered_devices.json
+device_cache.json
+*.discovery
+
+# Scan results
+scan_results/
+network_map.json
+
+# ─── Logs ────────────────────────────────────────────────────────────────────
+*.log
+iperfdiscovery.log
+discovery_*.log
+
+# ─── Temporary Files ─────────────────────────────────────────────────────────
+*.tmp
+*.temp
+*~
+.tmp_*
