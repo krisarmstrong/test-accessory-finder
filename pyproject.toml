@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "test-accessory-finder"
-version = "1.0.15"
+version = "1.0.16"
 description = "Automation tooling for test-accessory-finder."
 readme = "README.md"
 requires-python = ">=3.14"
