@@ -17,12 +17,12 @@ jobs:
         python-version: ["3.14"]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       with:
         fetch-depth: 0
 
     - name: Set up Python 3.14
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
         python-version: "3.14"
 
@@ -44,12 +44,12 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
       with:
         fetch-depth: 0
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
       with:
         python-version: "3.14"
 
@@ -66,7 +66,7 @@ jobs:
       run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v3
+      uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda # v3.0.0
       with:
         name: Release ${{ steps.get_version.outputs.VERSION }}
         body: |
@@ -97,3 +97,17 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
         twine upload dist/* --skip-existing || echo "Package may already exist on PyPI"
+
+  ci-complete:
+    name: CI Complete
+    needs: [test]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Verify required jobs
+      run: |
+        if [ "${{ needs.test.result }}" != "success" ]; then
+          echo "Required test matrix failed: ${{ needs.test.result }}"
+          exit 1
+        fi
+        echo "All required CI jobs passed."
