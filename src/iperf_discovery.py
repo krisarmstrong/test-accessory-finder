@@ -121,14 +121,14 @@ def parse_arguments():
         "-t",
         "--timeout",
         type=float,
-        help="Socket timeout in seconds (overrides default %.3fs)" % Config.min_scan_timeout,
+        help=f"Socket timeout in seconds (overrides default {Config.min_scan_timeout:.3f}s)",
     )
     parser.add_argument("-v", "--version", action="version", version=f"%(prog)s {__version__}")
     parser.add_argument(
         "-o",
         "--options",
         action="store_true",
-        help="Use advanced configuration from %s" % Config.option_file,
+        help=f"Use advanced configuration from {Config.option_file}",
     )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose console output")
 
@@ -187,7 +187,7 @@ async def tcp_port_ping_single(host, timeout):
         ipaddress.IPv4Address or None: The host if the port is open, else None.
     """
     try:
-        reader, writer = await asyncio.wait_for(
+        _reader, writer = await asyncio.wait_for(
             asyncio.open_connection(str(host), Config.tcp_port), timeout=timeout
         )
         writer.close()
@@ -219,7 +219,7 @@ async def tcp_port_ping(network, timeout):
     tasks = [tcp_port_ping_single(host, timeout) for host in network.hosts()]
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
-    for host, result in zip(network.hosts(), results):
+    for _host, result in zip(network.hosts(), results, strict=False):
         total_ip_count += 1
         if result and not isinstance(result, Exception):
             active_ip_count += 1
