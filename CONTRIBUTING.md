@@ -9,8 +9,8 @@ We welcome contributions!
 
    ```bash
    python -m pytest tests/
-   flake8 src/
-   black src/ tests/
+   ruff format --check .
+   ruff check .
    ```
 
 5. Commit (`git commit -m "feat: description"`) and push
